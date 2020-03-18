@@ -10,6 +10,7 @@ namespace Definux.HtmlBuilder
         private HtmlTag tag;
         private IList<HtmlElementAttribute> attributes;
         private string rawText;
+        private bool hasRawText;
         private HtmlElementsCollection children;
 
         internal HtmlElement()
@@ -21,6 +22,7 @@ namespace Definux.HtmlBuilder
         internal HtmlElement(string rawText)
         {
             this.rawText = rawText;
+            this.hasRawText = true;
             this.attributes = new List<HtmlElementAttribute>();
             this.children = new HtmlElementsCollection();
         }
@@ -36,6 +38,10 @@ namespace Definux.HtmlBuilder
         {
             get
             {
+                if (this.hasRawText)
+                {
+                    return string.Empty;
+                }
                 return this.tag.HasClosingTag ? Layouts.StartEndTagLayout : Layouts.SingleTagLayout;
             }
         }
@@ -171,7 +177,7 @@ namespace Definux.HtmlBuilder
 
         internal string GetElementHtml()
         {
-            if (string.IsNullOrEmpty(this.rawText))
+            if (!this.hasRawText)
             {
                 string elementLayout = string.Format(TagLayout, this.tag.Name, string.Join("", this.attributes));
 
@@ -183,7 +189,7 @@ namespace Definux.HtmlBuilder
 
         public override string ToString()
         {
-            if (string.IsNullOrEmpty(this.rawText))
+            if (!this.hasRawText)
             {
                 return string.Format(TagLayout, this.tag.Name, string.Join("", this.attributes));
             }
