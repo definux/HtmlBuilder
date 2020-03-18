@@ -2,9 +2,29 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <Authors>Georgi Karagogov</Authors>
+    <Description>Lightweight HTML5 builder for creating HTML string with fluent method syntax of C#.</Description>
+    <Company>Definux</Company>
+    <Copyright>Definux</Copyright>
+    <Version>$(PACKAGE_VERSION)</Version>
+    <RepositoryUrl>https://github.com/Definux/Definux.HtmlBuilder</RepositoryUrl>
+    <PackageTags>Fluent API, HTML5, C#, Builder</PackageTags>
+    <PackageIcon>logo_128.jpg</PackageIcon>
+    <PackageIconUrl />
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/Definux/Definux.HtmlBuilder</PackageProjectUrl>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Class1.cs" />
+    <None Include="..\..\art\logo_128.jpg">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 </Project>
