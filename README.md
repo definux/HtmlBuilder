@@ -44,6 +44,5 @@ var htmlElement= builder.StartElement(HtmlTags.Select)
 string actualHtml = builder.RenderHtml();
 
 // Builder result
-// <input type="email" name="email" placeholder="Enter your email"/>
+// <select name="food"><option value="1">Burger</option><option value="2">Pizza</option><option value="3">Ice Cream</option></select>
 ```
-
