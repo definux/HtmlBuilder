@@ -107,6 +107,27 @@ namespace Definux.HtmlBuilder
         }
 
         /// <summary>
+        /// Set attribute to the HTML element on condition.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public HtmlElement WithAttributeIf(string name, string value, bool condition)
+        {
+            if (this.attributes.Any(x => x.Name == name))
+            {
+                throw new InvalidOperationException($"Attribute {name} cannot be duplicated!");
+            }
+
+            if (condition)
+            {
+                this.attributes.Add(new HtmlElementAttribute(name, value));
+            }
+            
+            return this;
+        }
+
+        /// <summary>
         /// Set HTML element Id.
         /// </summary>
         /// <param name="id"></param>
