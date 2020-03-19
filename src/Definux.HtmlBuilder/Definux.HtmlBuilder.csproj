@@ -8,12 +8,12 @@
     <Company>Definux</Company>
     <Copyright>Definux</Copyright>
     <Version>$(PACKAGE_VERSION)</Version>
-    <RepositoryUrl>https://github.com/Definux/Definux.HtmlBuilder</RepositoryUrl>
+    <RepositoryUrl>https://github.com/Definux/HtmlBuilder</RepositoryUrl>
     <PackageTags>Fluent API, HTML5, C#, Builder</PackageTags>
     <PackageIcon>logo_128.jpg</PackageIcon>
     <PackageIconUrl />
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <PackageProjectUrl>https://github.com/Definux/Definux.HtmlBuilder</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/Definux/HtmlBuilder</PackageProjectUrl>
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
   </PropertyGroup>
 
