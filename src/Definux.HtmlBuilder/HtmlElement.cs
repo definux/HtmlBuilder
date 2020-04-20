@@ -143,13 +143,13 @@ namespace Definux.HtmlBuilder
         /// <returns></returns>
         public HtmlElement WithAttributeIf(string name, string value, bool condition)
         {
-            if (this.attributes.Any(x => x.Name == name))
-            {
-                throw new InvalidOperationException($"Attribute {name} cannot be duplicated!");
-            }
-
             if (condition)
             {
+                if (this.attributes.Any(x => x.Name == name))
+                {
+                    throw new InvalidOperationException($"Attribute {name} cannot be duplicated!");
+                }
+
                 this.attributes.Add(new HtmlElementAttribute(name, value));
             }
             
