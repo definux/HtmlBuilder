@@ -166,12 +166,12 @@ namespace Definux.HtmlBuilder
         /// <returns></returns>
         public HtmlElement WithConditionalClasses(string classesOnTrue, string classesOnFalse, bool condition, string sharedClasses = "")
         {
-            string sharedClassesSeparationSpace = string.IsNullOrWhiteSpace(sharedClasses) ? string.Empty : " ";
-
             classesOnTrue = classesOnTrue ?? string.Empty;
             classesOnFalse = classesOnFalse ?? string.Empty;
 
-            WithClasses($"{(condition ? classesOnTrue.Trim() : classesOnFalse.Trim())}{sharedClassesSeparationSpace}{sharedClasses.Trim()}");
+            string classes = $"{(condition ? classesOnTrue.Trim() : classesOnFalse.Trim())} {sharedClasses.Trim()}";
+
+            WithClasses(classes.Trim());
 
             return this;
         }
