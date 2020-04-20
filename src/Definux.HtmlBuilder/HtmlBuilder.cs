@@ -28,6 +28,7 @@ namespace Definux.HtmlBuilder
         public TagHelperOutput ApplyToTagHelperOutput(TagHelperOutput output)
         {
             output.TagName = this.element.Tag.Name;
+            output.TagMode = this.element.Tag.HasClosingTag ? TagMode.StartTagAndEndTag : TagMode.SelfClosing;
             foreach (var attribute in this.element.Attributes)
             {
                 output.Attributes.Add(new TagHelperAttribute(attribute.Name, attribute.Value));
