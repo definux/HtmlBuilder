@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Html;
+using Microsoft.AspNetCore.Razor.TagHelpers;
+using System;
 
 namespace Definux.HtmlBuilder
 {
@@ -21,6 +23,19 @@ namespace Definux.HtmlBuilder
             }
 
             return element.GetElementHtml();
+        }
+
+        public TagHelperOutput ApplyToTagHelperOutput(TagHelperOutput output)
+        {
+            output.TagName = this.element.Tag.Name;
+            foreach (var attribute in this.element.Attributes)
+            {
+                output.Attributes.Add(new TagHelperAttribute(attribute.Name, attribute.Value));
+            }
+
+            output.Content.SetHtmlContent(new HtmlString(this.element.GetElementContent()));
+
+            return output;
         }
 
         public void Reset()

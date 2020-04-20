@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Razor.TagHelpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -33,6 +34,10 @@ namespace Definux.HtmlBuilder
             this.attributes = new List<HtmlElementAttribute>();
             this.children = new HtmlElementsCollection();
         }
+
+        public HtmlTag Tag => this.tag;
+
+        public IList<HtmlElementAttribute> Attributes => this.attributes;
 
         private string TagLayout
         {
