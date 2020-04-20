@@ -134,6 +134,26 @@ namespace Definux.HtmlBuilder
         }
 
         /// <summary>
+        /// Set classes to the HTML element on condition.
+        /// </summary>
+        /// <param name="classesOnTrue"></param>
+        /// <param name="classesOnFalse"></param>
+        /// <param name="condition"></param>
+        /// <param name="sharedClasses"></param>
+        /// <returns></returns>
+        public HtmlElement WithConditionalClasses(string classesOnTrue, string classesOnFalse, bool condition, string sharedClasses = "")
+        {
+            string sharedClassesSeparationSpace = string.IsNullOrWhiteSpace(sharedClasses) ? string.Empty : " ";
+
+            classesOnTrue = classesOnTrue ?? string.Empty;
+            classesOnFalse = classesOnFalse ?? string.Empty;
+
+            WithClasses($"{(condition ? classesOnTrue.Trim() : classesOnFalse.Trim())}{sharedClassesSeparationSpace}{sharedClasses.Trim()}");
+
+            return this;
+        }
+
+        /// <summary>
         /// Set HTML element Id.
         /// </summary>
         /// <param name="id"></param>
