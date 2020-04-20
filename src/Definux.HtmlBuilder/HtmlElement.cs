@@ -76,6 +76,24 @@ namespace Definux.HtmlBuilder
         }
 
         /// <summary>
+        /// Conditional insert HTML element as a child of caller element.
+        /// </summary>
+        /// <param name="condition"></param>
+        /// <param name="elementAction"></param>
+        /// <returns></returns>
+        public HtmlElement AppendIf(bool condition, Action<HtmlElement> elementAction)
+        {
+            if (condition)
+            {
+                var childElement = new HtmlElement();
+                elementAction.Invoke(childElement);
+                this.children.Add(childElement);
+            }
+
+            return this;
+        }
+
+        /// <summary>
         /// Insert HTML element collection as children of caller element.
         /// </summary>
         /// <param name="elementsAction"></param>
