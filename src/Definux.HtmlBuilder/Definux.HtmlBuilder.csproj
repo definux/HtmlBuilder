@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <Authors>Georgi Karagogov</Authors>
+    <Authors>Definux</Authors>
     <Description>Lightweight HTML5 builder for creating HTML string with fluent method syntax of C#.</Description>
     <Company>Definux</Company>
     <Copyright>Definux</Copyright>
