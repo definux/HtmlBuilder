@@ -1,11 +1,13 @@
-﻿using Microsoft.AspNetCore.Razor.TagHelpers;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace Definux.HtmlBuilder
 {
+    /// <summary>
+    /// Implementation of HTML element.
+    /// </summary>
     public class HtmlElement
     {
         private HtmlTag tag;
@@ -14,12 +16,19 @@ namespace Definux.HtmlBuilder
         private bool hasRawText;
         private HtmlElementsCollection children;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="HtmlElement"/> class.
+        /// </summary>
         internal HtmlElement()
         {
             this.attributes = new List<HtmlElementAttribute>();
             this.children = new HtmlElementsCollection();
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="HtmlElement"/> class.
+        /// </summary>
+        /// <param name="rawText"></param>
         internal HtmlElement(string rawText)
         {
             this.rawText = rawText;
@@ -28,6 +37,10 @@ namespace Definux.HtmlBuilder
             this.children = new HtmlElementsCollection();
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="HtmlElement"/> class.
+        /// </summary>
+        /// <param name="tag"></param>
         internal HtmlElement(HtmlTag tag)
         {
             this.tag = tag;
@@ -35,8 +48,14 @@ namespace Definux.HtmlBuilder
             this.children = new HtmlElementsCollection();
         }
 
+        /// <summary>
+        /// Tag of the current element.
+        /// </summary>
         public HtmlTag Tag => this.tag;
 
+        /// <summary>
+        /// List of all attributes for current element.
+        /// </summary>
         public IList<HtmlElementAttribute> Attributes => this.attributes;
 
         private string TagLayout
@@ -47,6 +66,7 @@ namespace Definux.HtmlBuilder
                 {
                     return string.Empty;
                 }
+
                 return this.tag.HasClosingTag ? Layouts.StartEndTagLayout : Layouts.SingleTagLayout;
             }
         }
@@ -140,6 +160,7 @@ namespace Definux.HtmlBuilder
         /// </summary>
         /// <param name="name"></param>
         /// <param name="value"></param>
+        /// <param name="condition"></param>
         /// <returns></returns>
         public HtmlElement WithAttributeIf(string name, string value, bool condition)
         {
@@ -152,7 +173,7 @@ namespace Definux.HtmlBuilder
 
                 this.attributes.Add(new HtmlElementAttribute(name, value));
             }
-            
+
             return this;
         }
 
@@ -171,7 +192,7 @@ namespace Definux.HtmlBuilder
 
             string classes = $"{(condition ? classesOnTrue.Trim() : classesOnFalse.Trim())} {sharedClasses.Trim()}";
 
-            WithClasses(classes.Trim());
+            this.WithClasses(classes.Trim());
 
             return this;
         }
@@ -183,7 +204,7 @@ namespace Definux.HtmlBuilder
         /// <returns></returns>
         public HtmlElement WithId(string id)
         {
-            return WithAttribute("id", id);
+            return this.WithAttribute("id", id);
         }
 
         /// <summary>
@@ -193,7 +214,7 @@ namespace Definux.HtmlBuilder
         /// <returns></returns>
         public HtmlElement WithClasses(string classes)
         {
-            return WithAttribute("class", classes);
+            return this.WithAttribute("class", classes);
         }
 
         /// <summary>
@@ -204,9 +225,24 @@ namespace Definux.HtmlBuilder
         /// <returns></returns>
         public HtmlElement WithDataAttribute(string name, string value)
         {
-            return WithAttribute($"data-{name}", value);
+            return this.WithAttribute($"data-{name}", value);
         }
 
+        /// <inheritdoc/>
+        public override string ToString()
+        {
+            if (!this.hasRawText)
+            {
+                return string.Format(this.TagLayout, this.tag.Name, string.Join(string.Empty, this.attributes));
+            }
+
+            return this.rawText;
+        }
+
+        /// <summary>
+        /// Gets current element content.
+        /// </summary>
+        /// <returns></returns>
         internal string GetElementContent()
         {
             StringBuilder content = new StringBuilder();
@@ -218,23 +254,17 @@ namespace Definux.HtmlBuilder
             return content.ToString();
         }
 
+        /// <summary>
+        /// Gets current element HTML.
+        /// </summary>
+        /// <returns></returns>
         internal string GetElementHtml()
         {
             if (!this.hasRawText)
             {
-                string elementLayout = string.Format(TagLayout, this.tag.Name, string.Join("", this.attributes));
+                string elementLayout = string.Format(this.TagLayout, this.tag.Name, string.Join(string.Empty, this.attributes));
 
-                return string.Format(elementLayout, GetElementContent());
-            }
-
-            return this.rawText;
-        }
-
-        public override string ToString()
-        {
-            if (!this.hasRawText)
-            {
-                return string.Format(TagLayout, this.tag.Name, string.Join("", this.attributes));
+                return string.Format(elementLayout, this.GetElementContent());
             }
 
             return this.rawText;

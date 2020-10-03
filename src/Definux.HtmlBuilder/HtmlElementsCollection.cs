@@ -3,8 +3,14 @@ using System.Collections.Generic;
 
 namespace Definux.HtmlBuilder
 {
+    /// <summary>
+    /// Collection of <see cref="HtmlElement"/>.
+    /// </summary>
     public class HtmlElementsCollection : List<HtmlElement>
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="HtmlElementsCollection"/> class.
+        /// </summary>
         internal HtmlElementsCollection()
         {
         }

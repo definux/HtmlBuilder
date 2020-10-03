@@ -1,5 +1,10 @@
-﻿namespace Definux.HtmlBuilder
+﻿using Microsoft.AspNetCore.Razor.TagHelpers;
+
+namespace Definux.HtmlBuilder
 {
+    /// <summary>
+    /// Main HTML builder.
+    /// </summary>
     public interface IHtmlBuilder
     {
         /// <summary>
@@ -10,7 +15,7 @@
         HtmlElement StartElement(HtmlTag tag);
 
         /// <summary>
-        /// Render HTML content based on built element. 
+        /// Render HTML content based on built element.
         /// </summary>
         /// <returns></returns>
         string RenderHtml();
@@ -19,5 +24,12 @@
         /// Reset builder element.
         /// </summary>
         void Reset();
+
+        /// <summary>
+        /// Apply current HTML builder result to a <see cref="TagHelperOutput"/>.
+        /// </summary>
+        /// <param name="output"></param>
+        /// <returns></returns>
+        TagHelperOutput ApplyToTagHelperOutput(TagHelperOutput output);
     }
 }

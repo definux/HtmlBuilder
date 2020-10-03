@@ -1,13 +1,15 @@
-﻿using Microsoft.AspNetCore.Html;
+﻿using System;
+using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Razor.TagHelpers;
-using System;
 
 namespace Definux.HtmlBuilder
 {
+    /// <inheritdoc cref="IHtmlBuilder"/>
     public class HtmlBuilder : IHtmlBuilder
     {
         private HtmlElement element;
 
+        /// <inheritdoc/>
         public HtmlElement StartElement(HtmlTag tag)
         {
             this.element = new HtmlElement(tag);
@@ -15,6 +17,7 @@ namespace Definux.HtmlBuilder
             return this.element;
         }
 
+        /// <inheritdoc/>
         public string RenderHtml()
         {
             if (this.element == null)
@@ -22,9 +25,10 @@ namespace Definux.HtmlBuilder
                 throw new ArgumentNullException("HTML Element", "HTML element is not build. Use StartElement method to build your HTML element");
             }
 
-            return element.GetElementHtml();
+            return this.element.GetElementHtml();
         }
 
+        /// <inheritdoc/>
         public TagHelperOutput ApplyToTagHelperOutput(TagHelperOutput output)
         {
             output.TagName = this.element.Tag.Name;
@@ -39,6 +43,7 @@ namespace Definux.HtmlBuilder
             return output;
         }
 
+        /// <inheritdoc/>
         public void Reset()
         {
             this.element = null;
